@@ -1,4 +1,7 @@
 # quarkus-crud-app
+## Project Creation Procedure
+[http://rino.kozow.com/java/posts/build-quarkus-rest-crud-applications/](http://rino.kozow.com/java/posts/build-quarkus-rest-crud-applications/)
+
 ## To run this project
 ```
 cd /opt/projects/quarkus-crud-app
