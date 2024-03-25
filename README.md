@@ -7,7 +7,10 @@ cd /opt/projects/quarkus-crud-app
 ./mvnw compile quarkus:dev: -DskipTests
 
 ```
+## To test this project using Swagger
+http://localhost:8080/q/swagger-ui/
 
+## Project Info
 This project uses Quarkus, the Supersonic Subatomic Java Framework.
 
 If you want to learn more about Quarkus, please visit its website: https://quarkus.io/ .

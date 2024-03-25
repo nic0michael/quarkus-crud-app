@@ -5,6 +5,10 @@ import jakarta.ws.rs.core.Response.Status;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.PathParam;
 import jakarta.ws.rs.Produces;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import jakarta.inject.Inject;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.DELETE;
@@ -27,16 +31,16 @@ import jakarta.ws.rs.Path;
 import za.co.nico.entities.CmSampleData;
 import za.co.nico.exceptions.InvalidSampleDataException;
 import za.co.nico.services.CmSampleDataService;
-import za.co.nico.services.CmTemplateService;
 
-@Path("/CM_SD")
+@Path("/message-api/sampledata")
 public class CmSampleDataResource {
+	private static Logger logger = LoggerFactory.getLogger(CmSampleDataResource.class);
 	
 	@Inject
 	CmSampleDataService cmSampleDataService;
 
     @GET
-    @Path("/sampledata/{cmTemplateName}")
+    @Path("/{cmTemplateName}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response findByCmSampleDataName(@PathParam("cmTemplateName") String cmTemplateName ) {
         try {
@@ -49,7 +53,6 @@ public class CmSampleDataResource {
 	
 
     @POST
-    @Path("/sampledata")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Response createCmSampleData(CmSampleData cmSampleData) {
@@ -65,7 +68,6 @@ public class CmSampleDataResource {
 	
 
     @PUT
-    @Path("/sampledata")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Response updateCmSampleData(CmSampleData cmSampleData) {
@@ -81,7 +83,7 @@ public class CmSampleDataResource {
 	
 
 	   @DELETE
-	    @Path("/sampledata/{cmTemplateName}")
+	    @Path("/{cmTemplateName}")
 	    @Produces(MediaType.APPLICATION_JSON)
 	    public Response deleteCmSampleDataByCmTemplateName(@PathParam("cmTemplateName") String cmTemplateName ) {
 	        try {

@@ -7,6 +7,7 @@ import org.slf4j.LoggerFactory;
 
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
+import jakarta.transaction.Transactional;
 import za.co.nico.entities.CmSampleData;
 import za.co.nico.exceptions.DatabaseException;
 import za.co.nico.repos.CmSampleDataRepo;
@@ -33,6 +34,7 @@ public class CmSampleDataService {
 		 return cmSampleDataRepo.listAll();
 	}
 		
+	@Transactional
 	public CmSampleData createCmSampleData(CmSampleData cmSampleData) throws Exception {
 		Long id = null;
         cmSampleDataRepo.persist(cmSampleData);
@@ -41,26 +43,26 @@ public class CmSampleDataService {
         return cmSampleData;
     }
 	
-	
+	@Transactional
 	public CmSampleData updateCmSampleData(CmSampleData cmSampleData) throws Exception {
-		String cmTemplateName = cmSampleData.getCmTemplateName();
-		CmSampleData foundCmSampleData = findByCmTemplateName( cmTemplateName );
+		Long id = cmSampleData.getId();
+		CmSampleData foundCmSampleData = findById( id );
 		if(null == foundCmSampleData) {
-			logger.error("Could not find sample data : cmTemplateName : " + cmTemplateName);
-			throw new DatabaseException("Could not find sample data : cmTemplateName : " + cmTemplateName);
+			logger.error("Could not find sample data : id : " + id);
+			throw new DatabaseException("Could not find sample data : id : " + id);
 		}
 		foundCmSampleData.setCmSampleData(cmSampleData);
 		cmSampleDataRepo.persist(foundCmSampleData);
 		return foundCmSampleData;
-	}
-	
-	
+	}	
+
+	@Transactional
 	public void deleteCmSampleData(CmSampleData cmSampleData) throws Exception {
 		String cmTemplateName = cmSampleData.getCmTemplateName();
 		deleteCmSampleDataByCmTemplateName(cmTemplateName);
-	}
-	
+	}	
 
+	@Transactional
 	public void deleteCmSampleDataByCmTemplateName(String cmTemplateName) throws Exception {
 		CmSampleData foundCmSampleData = findByCmTemplateName( cmTemplateName );
 		if(null == foundCmSampleData) {
@@ -69,7 +71,8 @@ public class CmSampleDataService {
 		}
 		cmSampleDataRepo.delete(foundCmSampleData);
 	}
-
+	
+	@Transactional
 	public void deleteCmSampleDataById(Long id) throws Exception {
 		CmSampleData foundCmSampleData = findById(id);
 		if(null == foundCmSampleData) {
