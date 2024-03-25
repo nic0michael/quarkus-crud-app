@@ -1,8 +1,8 @@
 # quarkus-crud-app
-## Project Creation Procedure
+## A. Project Creation Procedure
 [http://rino.kozow.com/java/posts/build-quarkus-rest-crud-applications/](http://rino.kozow.com/java/posts/build-quarkus-rest-crud-applications/)
 
-## To run this project
+## B. To run this project
 ```
 cd /opt/projects/quarkus-crud-app
 
@@ -10,8 +10,92 @@ cd /opt/projects/quarkus-crud-app
 ./mvnw compile quarkus:dev: -DskipTests
 
 ```
-## To test this project using Swagger
+## C. To test this project using Swagger
 http://localhost:8080/q/swagger-ui/
+
+## D. Creating CM_Template Table CRUD with Postman
+
+### 1. GET Request to Find by cmTemplateName:
+URL: http://localhost:8080/message-api/templates/{cmTemplateName}
+
+Replace {cmTemplateName} with the actual value you want to search for.
+
+### 2. POST Request to Create CmTemplate:
+URL: http://localhost:8080/message-api/templates
+
+Request Body:
+```
+{
+  "creationDate": "2024-03-25T10:00:00",
+  "changedBy": "John Doe",
+  "cmTemplateName": "Template1",
+  "cmTemplateCategory": "Category1",
+  "cmTemplateContent": "Template Content",
+  "cmCampaignName": "Campaign1",
+  "cmTemplateOwnerName": "Owner1"
+}
+```
+
+### 3. PUT Request to Update CmTemplate:
+URL: http://localhost:8080/message-api/templates
+
+Request Body:
+```
+{
+  "id": 1,
+  "creationDate": "2024-03-25T10:00:00",
+  "changedBy": "Updated User",
+  "cmTemplateName": "Updated Template Name",
+  "cmTemplateCategory": "Updated Category",
+  "cmTemplateContent": "Updated Template Content",
+  "cmCampaignName": "Updated Campaign",
+  "cmTemplateOwnerName": "Updated Owner"
+}
+```
+
+### 4. DELETE Request to Delete CmTemplate by cmTemplateName:
+URL: http://localhost:8080/message-api/templates/{cmTemplateName}
+
+Replace {cmTemplateName} with the actual value you want to delete.
+
+## E. Creating CM_SampleData Table CRUD with Postman
+
+### 1. GET Request to Find by cmTemplateName:
+URL: http://localhost:8080/message-api/sampledata/{cmTemplateName}
+
+Replace {cmTemplateName} with the actual value you want to search for.
+
+### 2. POST Request to Create CmSampleData:
+URL: http://localhost:8080/message-api/sampledata
+
+Request Body:
+```
+{
+  "creationDate": "2024-03-25T10:00:00",
+  "changedBy": "John Doe",
+  "cmTemplateName": "MICA_BlackFriday2024",
+  "cmDataContent": "Sample content"
+}
+```
+
+### 3. PUT Request to Update CmSampleData:
+URL: http://localhost:8080/message-api/sampledata
+
+Request Body:
+```
+{
+  "id": 1,
+  "creationDate": "2024-03-25T10:00:00",
+  "changedBy": "Updated User",
+  "cmTemplateName": "Updated Template Name",
+  "cmDataContent": "Updated Sample content"
+}
+```
+
+### 4. DELETE Request to Delete CmSampleData by cmTemplateName:
+URL: http://localhost:8080/message-api/sampledata/{cmTemplateName}
+
+Replace {cmTemplateName} with the actual value you want to delete.
 
 ## Project Info
 This project uses Quarkus, the Supersonic Subatomic Java Framework.
