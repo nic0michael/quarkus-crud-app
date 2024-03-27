@@ -26,21 +26,36 @@ public class CmTemplate {
     @Access(AccessType.PROPERTY)
     private Long id;	
 
+
+    @Column(name = "Last_Updated") // Custom column name for creationDate
     private LocalDateTime creationDate;
     
     @NotNull
-    private String changedBy;
-    
+    @Column(name = "Cm_Template_Name", nullable = false, unique = true) // Ensure uniqueness at the database level
     private String cmTemplateName;  
+    
+    @NotNull
+    @Column(name = "Cm_Template_Category", nullable = false)
     private String cmTemplateCategory;  
+    
+    @NotNull
+    @Column(name = "Cm_Template_Content", nullable = false)
     private String cmTemplateContent; 
         
-    
+    @NotNull
     @Column(name = "Cm_CampaignName", nullable = false)
     private String cmCampaignName;  
     
+    @NotNull
     @Column(name = "Cm_TemplateOwnerName", nullable = false)
     private String cmTemplateOwnerName;  
+    
+
+    @NotNull
+    @Column(name = "Cm_Changed_By", nullable = false)
+    private String changedBy;
+
+     
 
 	public CmTemplate() {
 		super();
@@ -49,6 +64,7 @@ public class CmTemplate {
 	public CmTemplate(Long id, LocalDateTime creationDate, @NotNull String changedBy, String cmTemplateName,
 			String cmTemplateCategory, String cmTemplateContent, String cmCampaignName, String cmTemplateOwnerName) {
 		super();
+		
 		this.id = id;
 		this.creationDate = creationDate;
 		this.changedBy = changedBy;

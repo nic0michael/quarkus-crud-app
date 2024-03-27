@@ -32,8 +32,9 @@ public class CmSampleData {
 	
 	private LocalDateTime creationDate;
 	
-	@NotNull
-	private String changedBy;
+    @NotNull
+    @Column(name = "Cm_Changed_By", nullable = false)
+    private String changedBy;
 		
 	@Column(name = "Cm_TemplateName", nullable = false)
 	private String cmTemplateName; // MICA_BlackFriday2024
@@ -48,6 +49,7 @@ public class CmSampleData {
 	public CmSampleData(Long id, LocalDateTime creationDate, String changedBy, String cmTemplateName,
 			String cmDataContent) {
 		super();
+		
 		this.id = id;
 		this.creationDate = creationDate;
 		this.changedBy = changedBy;
