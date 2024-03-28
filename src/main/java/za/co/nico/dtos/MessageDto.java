@@ -80,6 +80,21 @@ public class MessageDto {
 		this.messageStatus = messageStatus;
 	}
 
+	
+
+	@Override
+	public String toString() {
+		return "MessageDto [id=" + id + ", messageId=" + messageId + ", senderSystem=" + senderSystem
+				+ ", templateOwner=" + templateOwner + ", userId=" + userId + ", messageType=" + messageType
+				+ ", templateId=" + templateId + ", templateName=" + templateName + ", salutation=" + salutation
+				+ ", valediction=" + valediction + ", mapPayload=" + mapPayload + ", messageTo=" + messageTo
+				+ ", emailFrom=" + emailFrom + ", emailTo=" + emailTo + ", emailCc=" + emailCc + ", emailBcc="
+				+ emailBcc + ", replyEmail=" + replyEmail + ", subject=" + subject + ", emailContentType="
+				+ emailContentType + ", cellNumber=" + cellNumber + ", body=" + body + ", attachments=" + attachments
+				+ ", enrichedBody=" + enrichedBody + ", priority=" + priority + ", sendDate=" + sendDate
+				+ ", messageStatus=" + messageStatus + "]";
+	}
+
 
 	public Long getId() {
 		return id;

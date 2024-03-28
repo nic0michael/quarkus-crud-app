@@ -6,6 +6,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import io.quarkus.runtime.util.StringUtil;
 import za.co.nico.dtos.MessageDto;
+import za.co.nico.exceptions.InvalidMessageException;
 
 public class MessageDtoValidator {
 	private static Logger logger = LoggerFactory.getLogger(MessageDtoValidator.class);
@@ -37,7 +38,10 @@ public class MessageDtoValidator {
 			hasFailed = true;
 			validationErrors.put("Error 400", "Fields needed not in body");
 		} else {
+			messageDto.setMessageStatus("");
+			messageDto.setSendDate(null);
 			lookForMissingPrimaryFields(messageDto,validationErrors);
+			
 			if (!StringUtil.isNullOrEmpty(messageDto.getMessageType())) {
 				String messageType = messageDto.getMessageType();
 
@@ -81,15 +85,15 @@ public class MessageDtoValidator {
 		return hasFailed;
 	}
 
-	private static void lookForMissingPrimaryFields(MessageDto messageDto,Map<String, String> validationErrors) {
-		if (StringUtil.isNullOrEmpty(messageDto.getMessageId())) {
-			validationErrors.put("Error 401", "MessageId not set");
-		}
+	private static void lookForMissingPrimaryFields(MessageDto messageDto,Map<String, String> validationErrors) throws Exception{
+
 		if (StringUtil.isNullOrEmpty(messageDto.getSenderSystem())) {
 			validationErrors.put("Error 402", "SenderSystem not set");
+			throw new InvalidMessageException("SenderSystem not set");
 		}
 		if (StringUtil.isNullOrEmpty(messageDto.getUserId())) {
 			validationErrors.put("Error 403", "UserId not set");
+			throw new InvalidMessageException("UserId not set");
 		}
 		if (StringUtil.isNullOrEmpty(messageDto.getMessageType())) {
 			validationErrors.put("Error 404", "MessageType not set");
@@ -107,6 +111,7 @@ public class MessageDtoValidator {
 //			validationErrors.put("Error 406", "EmailFrom not set");
 //			messageDto.setEmailFrom("message-api@loyaltyplus.aero");
 //		}
+		
 
 		if (StringUtil.isNullOrEmpty(messageDto.getEmailTo())) {
 			validationErrors.put("Error 407", "EmailTo not set");
@@ -128,8 +133,16 @@ public class MessageDtoValidator {
 			validationErrors.put("Error 411", "Body or EnrichedBody not set");
 		}
 
-		if (!StringUtil.isNullOrEmpty(messageDto.getBody()) && StringUtil.isNullOrEmpty(messageDto.getTemplateId())) {
+		if (!StringUtil.isNullOrEmpty(messageDto.getBody()) 
+				&& StringUtil.isNullOrEmpty(messageDto.getEnrichedBody())
+				&& StringUtil.isNullOrEmpty(messageDto.getTemplateId())) {
 			validationErrors.put("Error 412", "Body set and TemplateId not set");
+		}
+
+		if (!StringUtil.isNullOrEmpty(messageDto.getBody()) 
+				&& StringUtil.isNullOrEmpty(messageDto.getEnrichedBody())
+				&& StringUtil.isNullOrEmpty(messageDto.getTemplateOwner())) {
+			validationErrors.put("Error 413", "Body set and TemplateOwner not set");
 		}
 		
 
@@ -137,7 +150,7 @@ public class MessageDtoValidator {
 			String contentType = messageDto.getEmailContentType();
 			if(! HTML_CONTENT_TYPE.equalsIgnoreCase(contentType) &&
 			! TEXT_CONTENT_TYPE.equalsIgnoreCase(contentType) ){
-				validationErrors.put("Error 413", "Invalid Content Type : "+contentType);
+				validationErrors.put("Error 414", "Invalid Content Type : "+contentType);
 			}
 			
 		}
@@ -146,15 +159,15 @@ public class MessageDtoValidator {
 	private static void lookForMissingSmsFields(MessageDto messageDto,Map<String, String> validationErrors) {
 
 		if (StringUtil.isNullOrEmpty(messageDto.getBody()) && StringUtil.isNullOrEmpty(messageDto.getEnrichedBody())) {
-			validationErrors.put("Error 414", "Body or EnrichedBody not set");
+			validationErrors.put("Error 415", "Body or EnrichedBody not set");
 		}
 
 		if (!StringUtil.isNullOrEmpty(messageDto.getBody()) && StringUtil.isNullOrEmpty(messageDto.getTemplateId())) {
-			validationErrors.put("Error 415", "Body set and TemplateId not set");
+			validationErrors.put("Error 416", "Body set and TemplateId not set");
 		}
 		
 		if (StringUtil.isNullOrEmpty(messageDto.getCellNumber())) {
-			validationErrors.put("Error 416", "CellNumber not set");
+			validationErrors.put("Error 417", "CellNumber not set");
 		}
 	}
 	
