@@ -43,11 +43,11 @@ public class CmTemplate {
     private String cmTemplateContent; 
         
     @NotNull
-    @Column(name = "Cm_CampaignName", nullable = false)
+    @Column(name = "Cm_Campaign_Name", nullable = false)
     private String cmCampaignName;  
     
     @NotNull
-    @Column(name = "Cm_TemplateOwnerName", nullable = false)
+    @Column(name = "Cm_Template_Owner_Name", nullable = false)
     private String cmTemplateOwnerName;  
     
 

@@ -34,8 +34,8 @@ import za.co.nico.exceptions.InvalidMessageException;
 import za.co.nico.services.ValidateSendMessageService;
 
 @Path("/message-api/validate-message")
-public class ValidateSendMessageResource {
-	private static Logger logger = LoggerFactory.getLogger(ValidateSendMessageResource.class);
+public class ValidateAndSendMessageResource {
+	private static Logger logger = LoggerFactory.getLogger(ValidateAndSendMessageResource.class);
 
     @POST
     @Consumes(MediaType.APPLICATION_JSON)

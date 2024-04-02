@@ -1,6 +1,7 @@
 package za.co.nico.entities;
 
 import java.time.LocalDateTime;
+import java.util.Map;
 
 import org.eclipse.microprofile.openapi.annotations.media.Schema;
 
@@ -21,7 +22,7 @@ import za.co.nico.exceptions.InvalidSampleDataException;
  *  show create table CM_SampleData;
  */
 @Entity
-@Table(name = "CM_SampleData", schema = "sakila")
+@Table(name = "CM_Sample_Data", schema = "sakila")
 public class CmSampleData {
 
 
@@ -36,27 +37,26 @@ public class CmSampleData {
     @Column(name = "Cm_Changed_By", nullable = false)
     private String changedBy;
 		
-	@Column(name = "Cm_TemplateName", nullable = false)
+	@Column(name = "Cm_Template_Name", nullable = false, unique = true)
 	private String cmTemplateName; // MICA_BlackFriday2024
 	
-	@Column(name = "Cm_DataContent", nullable = false)
-	private String cmDataContent;
+	@Column(name = "Cm_Map_Payload")
+	private String cmMapPayloadJson;
 	
 	public CmSampleData() {
 		super();
 	}
-
-	public CmSampleData(Long id, LocalDateTime creationDate, String changedBy, String cmTemplateName,
-			String cmDataContent) {
+	
+	public CmSampleData(Long id, LocalDateTime creationDate, @NotNull String changedBy, String cmTemplateName,
+			String cmMapPayloadJson) {
 		super();
-		
 		this.id = id;
 		this.creationDate = creationDate;
 		this.changedBy = changedBy;
 		this.cmTemplateName = cmTemplateName;
-		this.cmDataContent = cmDataContent;
+		this.cmMapPayloadJson = cmMapPayloadJson;
 	}
-
+	
 	public Long getId() {
 		return id;
 	}
@@ -89,13 +89,15 @@ public class CmSampleData {
 		this.cmTemplateName = cmTemplateName;
 	}
 
-	public String getCmDataContent() {
-		return cmDataContent;
+	public String getCmMapPayloadJson() {
+		return cmMapPayloadJson;
 	}
 
-	public void setCmDataContent(String cmDataContent) {
-		this.cmDataContent = cmDataContent;
+
+	public void setCmMapPayloadJson(String cmMapPayloadJson) {
+		this.cmMapPayloadJson = cmMapPayloadJson;
 	}
+
 
 	public void setCmSampleData(CmSampleData cmSampleData) throws Exception {
 		if (cmSampleData == null || cmSampleData.isEmpty()) {
@@ -106,14 +108,14 @@ public class CmSampleData {
 		creationDate  = cmSampleData.getCreationDate();
 		changedBy = cmSampleData.getChangedBy();
 		cmTemplateName = cmSampleData.getCmTemplateName();
-		cmDataContent = cmSampleData.getCmDataContent();
+		cmMapPayloadJson = cmSampleData.getCmMapPayloadJson();
 	}
 	
 
 	private boolean isEmpty() {
 		boolean isEmpty = false;
 		if(StringUtil.isNullOrEmpty(cmTemplateName)) isEmpty = true;
-		if(StringUtil.isNullOrEmpty(cmDataContent)) isEmpty = true;
+		if(StringUtil.isNullOrEmpty(cmMapPayloadJson)) isEmpty = true;
 		
 		return isEmpty;
 	}

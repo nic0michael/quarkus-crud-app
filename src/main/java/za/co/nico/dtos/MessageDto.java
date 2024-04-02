@@ -17,7 +17,7 @@ public class MessageDto {
 	private String templateName;
 	private String salutation;
 	private String valediction;
-    private Map<String, String> mapPayload; // Object>
+    private Map<String, Object> mapPayload; // Object>
 	private String messageTo;
 	private String emailFrom;
 	private String emailTo;
@@ -47,7 +47,7 @@ public class MessageDto {
 
 	public MessageDto(Long id, String messageId, String senderSystem, String templateOwner, String userId,
 			String messageType, String templateId, String templateName, String salutation, String valediction,
-			Map<String, String> mapPayload, String messageTo, String emailFrom,
+			Map<String, Object> mapPayload, String messageTo, String emailFrom,
 			String emailTo, String emailCc, String emailBcc, String replyEmail, String subject, String emailContentType,
 			String cellNumber, String body, List<String> attachments, String enrichedBody, Integer priority,
 			String sendDate, String messageStatus) {
@@ -196,12 +196,12 @@ public class MessageDto {
 	}
 
 
-	public Map<String, String> getMapPayload() {
+	public Map<String, Object> getMapPayload() {
 		return mapPayload;
 	}
 
 
-	public void setMapPayload(Map<String, String> mapPayload) {
+	public void setMapPayload(Map<String, Object> mapPayload) {
 		this.mapPayload = mapPayload;
 	}
 
@@ -354,6 +354,7 @@ public class MessageDto {
 		this.messageStatus = messageStatus;
 	}
 
+	
 
 	
 	
