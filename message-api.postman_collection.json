@@ -1,0 +1,443 @@
+{
+	"info": {
+		"_postman_id": "55881d5e-9135-4141-979b-0ea5e860fd06",
+		"name": "message-api",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "2115253"
+	},
+	"item": [
+		{
+			"name": "http://localhost/message-api/sendmessage",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"id\": 1,\n  \"messageId\": \"1\",\n  \"senderSystem\": \"2\",\n  \"templateOwner\":\"MICA\",\n  \"userId\": \"2\",\n  \"messageType\": \"EMAIL\",\n  \"templateId\": \"hello-world-email\", // lower case\n  \"templateName\": \"hello-world-email\", // lower case\n  \"salutation\" : \"Mr Piet Pompies\",\n  \"valediction\" : \"<br><strong>The Boss</strong>\",\n  \"mapPayload\": \"{\\\"name\\\": \\\"Piet\\\", \\\"surname\\\": \\\"Pompies\\\", \\\"title\\\": \\\"Mr\\\"}\",\n  \"cellNumber\": \"dummyCellNumber\",\n  \"messageTo\": \"nico\",\n  \"emailFrom\": \"message-api@loyaltyplus.aero\",\n\"emailTo\": \"nicomichael2018@yahoo.com\",\n//   \"emailTo\": \"nico@loyaltyplus.cloud\",\n  \"emailCc\": \"nicomichael2012@gmail.com\",\n//   \"emailBcc\": \"nicomichael2018@yahoo.com\",\n  \"replyEmail\": \"nico@loyaltyplus.cloud\",\n  \"subject\": \"testSubject002\",\n//   \"emailContentType\":\"text/plain\",\n  \"emailContentType\":\"text/html\",\n  \"body\": \"<html><body> Quam id leo in vitae turpis. Tortor vitae purus faucibus ornare suspendisse sed.</body></html>\",\n//   \"enrichedBody\": \"<html><body>hello world</body></html>\",\n  \"priority\": 0,\n  // DO NOT SEND DATE WE SET IT ON OUR SIDE SERVER DATE \"sendDate\": \"2024-02-20T00:00:00\",\n  \"messageStatus\": \"dummyMessageStatus\"\n}\n\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/message-api/sendmessage",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"message-api",
+						"sendmessage"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost/message-api/sendmessage Copy",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"id\": 1,\n  \"messageId\": \"1\",\n  \"senderSystem\": \"2\",\n  \"userId\": \"2\",\n  \"templateId\": \"ff\",\n  \"messageTo\": \"nico\",\n  \"body\": \"body\",\n  \"enrichedBody\": \"enrichedBody\"\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/message-api/sendmessage",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"message-api",
+						"sendmessage"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "SAMPLEDATA POST http://localhost:8080/message-api/sampledata",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text",
+						"disabled": true
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"creationDate\": \"2024-03-25T10:00:00\",\n  \"changedBy\": \"John Doe\",\n  \"cmTemplateName\": \"MICA_BlackFriday2024\",\n  \"cmMapPayloadJson\": \"{\\\"name\\\": \\\"Piet\\\", \\\"surname\\\": \\\"Pompies\\\", \\\"title\\\": \\\"Mr\\\"}\",\n  \"cmDataContent\": \"Sample content\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/message-api/sampledata",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"message-api",
+						"sampledata"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "SAMPLEDATA GET http://localhost:8080/message-api/sampledata/{cmTemplateName}",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/message-api/sampledata/MICA_BlackFriday2024",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"message-api",
+						"sampledata",
+						"MICA_BlackFriday2024"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "SAMPLEDATA PUT http://localhost:8080/message-api/sampledata",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"id\": 1, // Edit this value by hand\n  \"creationDate\": \"2024-03-25T10:00:00\",\n  \"changedBy\": \"Updated User\",\n  \"cmTemplateName\": \"UpdatedTemplateName\",\n  \"cmDataContent\": \"Updated Sample content\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/message-api/sampledata",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"message-api",
+						"sampledata"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET 2 SAMPLEDATA GET http://localhost:8080/message-api/sampledata/{cmTemplateName}",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/message-api/sampledata/UpdatedTemplateName",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"message-api",
+						"sampledata",
+						"UpdatedTemplateName"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "SAMPLEDATA DELETE http://localhost:8080/message-api/sampledata/tt",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/message-api/sampledata/tt",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"message-api",
+						"sampledata",
+						"tt"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "TEMPLATE POST http://localhost:8080/message-api/templates/{cmTemplateName}",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"creationDate\": \"2024-03-25T10:00:00\",\n  \"changedBy\": \"John Doe\",\n  \"cmTemplateName\": \"MICA_BlackFriday2024\",\n  \"cmTemplateCategory\": \"Category1\",\n  \"cmTemplateContent\": \"Template Content\",\n  \"cmCampaignName\": \"Campaign1\",\n  \"cmTemplateOwnerName\": \"Owner1\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/message-api/templates",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"message-api",
+						"templates"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "TEMPLATE GET http://localhost:8080/message-api/templates/{cmTemplateName}",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/message-api/templates/Template1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"message-api",
+						"templates",
+						"Template1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "TEMPLATE PUT http://localhost:8080/message-api/templates",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"id\": 4, // Edit this value by hand\n  \"creationDate\": \"2024-03-25T10:00:00\",\n  \"changedBy\": \"Updated User\",\n  \"cmTemplateName\": \"UpdatedTemplateName\",\n  \"cmTemplateCategory\": \"Updated Category\",\n  \"cmTemplateContent\": \"Updated Template Content\",\n  \"cmCampaignName\": \"Updated Campaign\",\n  \"cmTemplateOwnerName\": \"Updated Owner\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/message-api/templates",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"message-api",
+						"templates"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "TEMPLATE DELETE http://localhost:8080/message-api/templates/{cmTemplateName}",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/message-api/templates/UpdatedTemplateName",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"message-api",
+						"templates",
+						"UpdatedTemplateName"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "VALIDATE FAILING  http://localhost:8080/message-api/validate-message",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"senderSystem\": \"2\", // InvalidMessageException thrown if missing : status 400\n    \"userId\": \"2\", // InvalidMessageException thrown if missing : status 400\n    \"messageType\": \"EMAIL\", // this is compulsory\n    // \"emailTo\": \"nicomichael2018@yahoo.com\",\n    //   \"replyEmail\": \"nico@loyaltyplus.cloud\",\n    //   \"subject\": \"testSubject002\",\n    //   \"emailContentType\":\"text/html\",\n    //   \"templateOwner\":\"MICA\",\n    //   \"templateId\": \"hello-world-email\", // lower case\n    \"body\": \"<html><body> Quam id leo in vitae turpis. Tortor vitae purus faucibus ornare suspendisse sed.</body></html>\",\n    //   \"enrichedBody\": \"<html><body>hello world</body></html>\",\n    \"id\": 1,\n    \"messageId\": \"1\",\n    \"templateName\": \"hello-world-email\", // lower case\n    \"salutation\": \"Mr Piet Pompies\",\n    \"valediction\": \"<br><strong>The Boss</strong>\",\n    \"mapPayload\": {\n        \"name\": \"Piet\",\n        \"surname\": \"Pompies\",\n        \"title\": \"Mr\"\n    },\n    \"emailFrom\": \"message-api@loyaltyplus.aero\",\n    \"emailCc\": \"nicomichael2012@gmail.com\",\n    \"emailBcc\": \"nicomichael2018@yahoo.com\",\n    \"cellNumber\": \"dummyCellNumber\",\n    \"messageTo\": \"nico\",\n    \"priority\": 0,\n    \"sendDate\": \"2024-02-20T00:00:00\",\n    \"messageStatus\": \"dummyMessageStatus\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/message-api/validate-message",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"message-api",
+						"validate-message"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "VALIDATE http://localhost:8080/message-api/validate-message Copy",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"id\": 1,\n    \"messageId\": \"1\",\n    \"senderSystem\": \"2\", // InvalidMessageException thrown if missing : status 400\n    \"templateOwner\": \"Mica\", // converts to uppercase\n    \"userId\": \"2\", // InvalidMessageException thrown if missing : status 400\n    \"messageType\": \"Email\", // converts to uppercase\n    \"templateId\": \"Hello-World-Email\", // converts to lower case\n    \"templateName\": \"Hello-World-Email\", \n    \"salutation\": \"Mr Piet Pompies\",\n    \"valediction\": \"<br><strong>The Boss</strong>\",\n    \"mapPayload\": {\n        \"name\": \"Piet\",\n        \"surname\": \"Pompies\",\n        \"title\": \"Mr\"\n    },\n    \"cellNumber\": \"dummyCellNumber\",\n    \"messageTo\": \"nico\",\n    \"emailFrom\": \"message-api@loyaltyplus.aero\",\n    \"emailTo\": \"nicomichael2018@yahoo.com\",\n    \"emailCc\": \"nicomichael2012@gmail.com\",\n    \"emailBcc\": \"nicomichael2018@yahoo.com\",\n    \"replyEmail\": \"nico@loyaltyplus.cloud\",\n    \"subject\": \"testSubject002\",\n    \"emailContentType\": \"text/html\",\n    \"body\": \"<html><body> Quam id leo in vitae turpis. Tortor vitae purus faucibus ornare suspendisse sed.</body></html>\",\n    \"enrichedBody\": \"<html><body>hello world</body></html>\",\n    \"priority\": 0,\n    \"sendDate\": \"2024-02-20T00:00:00\",\n    \"messageStatus\": \"dummyMessageStatus\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/message-api/validate-message",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"message-api",
+						"validate-message"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET http://localhost:8080/message-api/enriched/MICA_BlackFriday2024",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "GET http://localhost:8080/message-api/enriched/MICA_BlackFriday2024",
+					"protocol": "GET http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"message-api",
+						"enriched",
+						"MICA_BlackFriday2024"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST http://localhost:8080/message-api/enriched/",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"creationDate\": \"2024-03-25T10:00:00\",\n  \"changedBy\": \"John Doe\",\n  \"cmTemplateName\": \"MICA_BlackFriday2024\",\n  \"cmMapPayloadJson\": \"{\\\"name\\\": \\\"Piet\\\", \\\"surname\\\": \\\"Pompies\\\", \\\"title\\\": \\\"Mr\\\"}\",\n  \"cmTemplateContent\":  \"<html><body> Quam id leo in vitae turpis. Tortor vitae purus faucibus ornare suspendisse sed.</body></html>\",\n  \"cmDataContent\": \"Sample content\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/message-api/enriched/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"message-api",
+						"enriched",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST MSG  http://localhost:8080/message-api/validate-message",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/message-api/validate-message",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"message-api",
+						"validate-message"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
