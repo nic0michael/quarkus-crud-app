@@ -31,6 +31,7 @@ public class ValidateSendMessageService {
 
 	public MessageDto sendMessage(MessageDto messageDto) throws Exception {
 		boolean operation = TEST; 
+		logger.info("sendMessage called : operation :"+operation);
 		messageDto.setMessageId(makeMessageId());
 		if (!MessageDtoValidator.validateSendBody(messageDto)) {
 			Client client = null;
