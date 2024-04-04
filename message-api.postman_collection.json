@@ -438,6 +438,36 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "POST ENR http://localhost:8080/message-api/enriched/",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"creationDate\": \"2024-03-25T10:00:00\",\n  \"changedBy\": \"John Doe\",\n  \"cmTemplateName\": \"MICA_BlackFriday2024\",\n  \"cmTemplateCategory\": \"Category1\",\n  \"cmTemplateContent\": \"<html><body> Good morning ${title} ${name} ${surname} </body></html>\",\n  \"cmMapPayloadJson\": \"{\\\"name\\\": \\\"Piet\\\", \\\"surname\\\": \\\"Pompies\\\", \\\"title\\\": \\\"Mr\\\"}\",\n  \"cmEnrichedDisplayDataContent\": \" empty\",\n  \"cmCampaignName\": \"MICA_BlackFriday2024\",\n  \"cmTemplateOwnerName\": \"Owner1\"\n}\n\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/message-api/enriched/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"message-api",
+						"enriched",
+						""
+					]
+				}
+			},
+			"response": []
 		}
 	]
 }

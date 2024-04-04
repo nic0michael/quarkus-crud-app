@@ -21,10 +21,10 @@ public class EnrichedDisplayMessageService {
 
 	/**
 	 * This method calls the Camel Freemarker API 
-	 * It should use String messageBody field in MessageDto as Freemarker Template
-	 * And use Map<String, Object> mapPayload field in MessageDto as Freemarker  Data Model
-	 * It should produce the field : String enrichedMessageBody in MessageDto
-	 * containing the enriched HTML
+	 * It uses String cmTemplateContent field in cmEnrichedDisplayData as Freemarker Template
+	 * And usesString cmMapPayloadJson field in cmEnrichedDisplayData as Freemarker  Data Model
+	 * It produces in the field : String cmEnrichedDisplayDataContent in cmEnrichedDisplayData
+	 * the enriched HTML
 	 */
 	public void enrichMessageBody(CmEnrichedDisplayData cmEnrichedDisplayData ) {
 		logger.info("enrichMessageBody called");
@@ -33,29 +33,24 @@ public class EnrichedDisplayMessageService {
         String cmMapPayloadJson = cmEnrichedDisplayData.getCmDataContent();
         logger.info("CmMapPayloadJson :" + cmMapPayloadJson);
         try {
-            // Convert JSON string to Map<String, Object>
+
             ObjectMapper objectMapper = new ObjectMapper();
             HashMap<String, Object> dataModel = objectMapper.readValue(cmMapPayloadJson, HashMap.class);
 
-            // Freemarker configuration
             Configuration cfg = new Configuration(Configuration.VERSION_2_3_31);
             cfg.setDefaultEncoding("UTF-8");
             cfg.setTemplateExceptionHandler(TemplateExceptionHandler.RETHROW_HANDLER);
 
-            // Freemarker template
             String cmTemplateContent = cmEnrichedDisplayData.getCmTemplateContent();
             logger.info("CmTemplateContent : " + cmTemplateContent);
             Template template = new Template("template", cmTemplateContent, cfg);
 
-            // Merge template with data model
             StringWriter stringWriter = new StringWriter();
             template.process(dataModel, stringWriter);
 
-            // Get the merged output
             String enrichedBody = stringWriter.toString();
             logger.info("enrichedBody: {}", enrichedBody);
 
-            // Set the enriched body to the CmEnrichedDisplayData
             cmEnrichedDisplayData.setCmEnrichedDisplayDataContent(enrichedBody);
 
         } catch (Exception e) {
