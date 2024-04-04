@@ -6,7 +6,7 @@
 ```
 cd /opt/projects/quarkus-crud-app
 
-# This prevents test errors: Maven skip tests
+# This prevents test errors: Maven skip tests (run test-quarkus)
 ./mvnw compile quarkus:dev: -DskipTests
 
 ```

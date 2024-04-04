@@ -31,6 +31,21 @@
 	</dependencyManagement>
 	<dependencies>
 		
+    <!-- Apache Camel Core -->
+    <dependency>
+        <groupId>org.apache.camel</groupId>
+        <artifactId>camel-core</artifactId>
+        <version>3.6.0</version>
+    </dependency>
+
+    <!-- Apache Camel Freemarker Component -->
+    <dependency>
+        <groupId>org.apache.camel</groupId>
+        <artifactId>camel-freemarker</artifactId>
+        <version>4.2.0</version>
+    </dependency>
+    
+
 	<dependency>
 	    <groupId>io.quarkus</groupId>
 	    <artifactId>quarkus-jsonb</artifactId>

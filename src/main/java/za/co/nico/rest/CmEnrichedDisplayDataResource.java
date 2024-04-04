@@ -24,7 +24,7 @@ import za.co.nico.exceptions.InvalidTemplateException;
 import za.co.nico.services.CmEnrichedDisplayDataService;
 import za.co.nico.services.CmSampleDataService;
 import za.co.nico.services.CmTemplateService;
-import za.co.nico.services.EnrichedDisplayMessageRouterService;
+import za.co.nico.services.EnrichedDisplayMessageService;
 import za.co.nico.type.APIResponses;
 
 @Path("/message-api/enriched")
@@ -66,13 +66,15 @@ public class CmEnrichedDisplayDataResource {
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response createCmTemplate(CmTemplate cmTemplate) {
+		logger.info("Called /message-api/enriched/ createCmTemplate");
 	    try {
 	    	if(null == cmTemplate) {
 	    		logger.error("CmTemplate is null");
 	    	}
+	    	logger.info("cmTemplate received : " + cmTemplate);
 
 	    	String cmTemplateName = cmTemplate.getCmTemplateName();
-	    	logger.info("cmTemplateName : "+cmTemplateName);
+	    	logger.info("cmTemplateName : " + cmTemplateName);
 	    	CmSampleData cmSampleData = cmSampleDataService.findByCmTemplateName(cmTemplateName);
 	    	if(null == cmSampleData) {
 	    		logger.error("CmSampleData is null");

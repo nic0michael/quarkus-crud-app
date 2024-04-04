@@ -38,7 +38,7 @@ public class CmEnrichedDisplayDataService {
 	CmEnrichedDisplayDataRepo repoCmEnrichedDisplayDataRepo;
 	
 	@Inject
-	EnrichedDisplayMessageRouterService messageRouterService;
+	EnrichedDisplayMessageService messageRouterService;
 
 	public CmEnrichedDisplayData findByCmTemplateName(String cmTemplateName) throws Exception{
 		return repoCmEnrichedDisplayDataRepo.findByCmTemplateName(cmTemplateName);
@@ -50,12 +50,12 @@ public class CmEnrichedDisplayDataService {
 		
 		String cmTemplateName = cmTemplate.getCmTemplateName();
 		String cmTemplateContent = cmTemplate.getCmTemplateContent();
+		logger.info("cmTemplateContent : "+cmTemplateContent);
 		LocalDateTime creationDate = cmTemplate.getCreationDate();
 	    String changedBy = cmTemplate.getChangedBy();
 		String cmDataContent = cmSampleData.getCmMapPayloadJson();
 	    String mapPayloadJson = cmSampleData.getCmMapPayloadJson();
 	    logger.info("mapPayloadJson : "+mapPayloadJson);
-	    Map<String, Object> mapPayload = jsonToMap(mapPayloadJson);
 		
 		CmEnrichedDisplayData foundCmEnrichedDisplayData = repoCmEnrichedDisplayDataRepo.findByCmTemplateName(cmTemplateName);
 		if(null == foundCmEnrichedDisplayData) {
@@ -68,15 +68,10 @@ public class CmEnrichedDisplayDataService {
 	    foundCmEnrichedDisplayData.setChangedBy(changedBy);
 	    foundCmEnrichedDisplayData.setCmDataContent(cmDataContent);
 	    foundCmEnrichedDisplayData.setCmTemplateContent(cmTemplateContent);
-	    
-	    MessageDto messageDto = new MessageDto();
-	    messageDto.setBody(cmTemplateContent);
-	    messageDto.setMapPayload(mapPayload);
-	    
-	    messageRouterService.enrichMessageBody(messageDto);
-	    
-	    String enrichedBody = messageDto.getEnrichedBody();	    
-	    foundCmEnrichedDisplayData.setCmEnrichedDisplayDataContent(enrichedBody);
+		    
+	    messageRouterService.enrichMessageBody(foundCmEnrichedDisplayData );	    
+//	    String enrichedBody = foundCmEnrichedDisplayData.getCmEnrichedDisplayDataContent();	
+//	    foundCmEnrichedDisplayData.setCmEnrichedDisplayDataContent(enrichedBody);
    	    
 	    logger.info("foundCmEnrichedDisplayData : "+foundCmEnrichedDisplayData);
 	    try {

@@ -152,6 +152,15 @@ public class CmTemplate {
 	public void setCmTemplateOwnerName(String cmTemplateOwnerName) {
 		this.cmTemplateOwnerName = cmTemplateOwnerName;
 	}
+	
+	
+	@Override
+	public String toString() {
+		return "CmTemplate [id=" + id + ", creationDate=" + creationDate + ", cmTemplateName=" + cmTemplateName
+				+ ", cmTemplateCategory=" + cmTemplateCategory + ", cmTemplateContent=" + cmTemplateContent
+				+ ", cmCampaignName=" + cmCampaignName + ", cmTemplateOwnerName=" + cmTemplateOwnerName + ", changedBy="
+				+ changedBy + "]";
+	}
 
 	public void setCmTemplate(CmTemplate cmTemplate) throws Exception {
 	    if (cmTemplate == null || cmTemplate.isEmpty()) {

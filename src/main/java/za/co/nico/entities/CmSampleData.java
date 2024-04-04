@@ -57,6 +57,14 @@ public class CmSampleData {
 		this.cmMapPayloadJson = cmMapPayloadJson;
 	}
 	
+	
+	
+	@Override
+	public String toString() {
+		return "CmSampleData [id=" + id + ", creationDate=" + creationDate + ", changedBy=" + changedBy
+				+ ", cmTemplateName=" + cmTemplateName + ", cmMapPayloadJson=" + cmMapPayloadJson + "]";
+	}
+
 	public Long getId() {
 		return id;
 	}
