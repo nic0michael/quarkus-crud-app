@@ -5,6 +5,9 @@ import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
@@ -33,12 +36,13 @@ import za.co.nico.repos.CmEnrichedDisplayDataRepo;
 public class CmEnrichedDisplayDataService {
 	
 	private static final Logger logger = LoggerFactory.getLogger(CmEnrichedDisplayDataService.class);
+	private static final String DOT_FTL = ".ftl";
 			
 	@Inject
 	CmEnrichedDisplayDataRepo repoCmEnrichedDisplayDataRepo;
 	
 	@Inject
-	EnrichedDisplayMessageService messageRouterService;
+	EnrichedDisplayMessageService enrichedDisplayMessageService;
 
 	public CmEnrichedDisplayData findByCmTemplateName(String cmTemplateName) throws Exception{
 		return repoCmEnrichedDisplayDataRepo.findByCmTemplateName(cmTemplateName);
@@ -69,14 +73,17 @@ public class CmEnrichedDisplayDataService {
 	    foundCmEnrichedDisplayData.setCmDataContent(cmDataContent);
 	    foundCmEnrichedDisplayData.setCmTemplateContent(cmTemplateContent);
 		    
-	    messageRouterService.enrichMessageBody(foundCmEnrichedDisplayData );	    
+	    enrichedDisplayMessageService.enrichMessageBody(foundCmEnrichedDisplayData );	    
 //	    String enrichedBody = foundCmEnrichedDisplayData.getCmEnrichedDisplayDataContent();	
 //	    foundCmEnrichedDisplayData.setCmEnrichedDisplayDataContent(enrichedBody);
+	    String freemarkerTemplateName = foundCmEnrichedDisplayData.getCmTemplateName();
+	    String freemarkerTemplateContents = foundCmEnrichedDisplayData.getCmTemplateContent();
    	    
 	    logger.info("foundCmEnrichedDisplayData : "+foundCmEnrichedDisplayData);
 	    try {
 			repoCmEnrichedDisplayDataRepo.persist(foundCmEnrichedDisplayData);
 			logger.info("Persisted foundCmEnrichedDisplayData : "+foundCmEnrichedDisplayData);
+			writeFreemarkerTemplateToDisk(freemarkerTemplateName , freemarkerTemplateContents);
 		} catch (Exception e) {
 			logger.error("Failed to persist foundCmEnrichedDisplayData",e);
 			throw new Exception("Failed to persist foundCmEnrichedDisplayData",e);
@@ -94,6 +101,51 @@ public class CmEnrichedDisplayDataService {
 	    return jsonToMap;
 	}
 
+
+
+	/**
+	 * This method creates a file with name : cmTemplateName + FTL
+	 * In folder src/main/resources/templates/freemarker
+	 * with content freemarkerTemplateContents
+	 * 
+	 */
+	private void writeFreemarkerTemplateToDisk(String cmTemplateName, String freemarkerTemplateContent) {
+		String freemarkerTemplateFileName = cmTemplateName + DOT_FTL;
+	    String folderPath = "src/main/resources/templates/freemarker/";
+	    FileWriter writer = null;
+	    File file = null;
+
+	    try {
+	        File folder = new File(folderPath);
+	        if (!folder.exists()) {
+	            folder.mkdirs();
+	        }
+	        
+	        file = new File(folderPath + freemarkerTemplateFileName);
+	        
+	        if (file.exists()) {
+	            file.delete();
+	        }
+
+	        file.createNewFile();	        
+	        writer = new FileWriter(file);
+	        writer.write(freemarkerTemplateContent);
+
+
+	        logger.info("Freemarker template file created: " + file.getAbsolutePath());
+	    } catch (IOException e) {
+	        logger.error("Failed to write Freemarker template file", e);
+	        
+	    } finally {
+	        if (writer != null) {
+	            try {
+	                writer.close();
+	            } catch (IOException e) {
+	                logger.error("Failed to close FileWriter", e);
+	            }
+	        }
+	    } 
+	}
 
 	
 

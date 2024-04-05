@@ -1,4 +1,6 @@
 package za.co.nico.services;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -29,6 +31,30 @@ public class CmTemplateService {
 		return templateRepo.findByCmTemplateName(cmTemplateName);
 	}
 	
+	public List<String> listCmTemplateNames(String cmTemplateOwnerName)  throws Exception {
+		List<String> listCmTemplateNames = new ArrayList<String>();
+		List<CmTemplate> templates = listAllByCmTemplateOwnerName(cmTemplateOwnerName);
+		for (CmTemplate cmTemplate : templates) {
+			listCmTemplateNames.add(cmTemplate.getCmTemplateName());
+		}
+	
+		return listCmTemplateNames;
+	}
+	
+
+	public List<String> cmTemplateOwnerNames()  throws Exception {
+		List<String> cmTemplateOwnerNames = new ArrayList<String>();
+		List<CmTemplate> templates = cmTemplateOwnerName();
+		if (templates != null || !templates.isEmpty()) {
+			for (CmTemplate cmTemplate : templates) {
+				cmTemplateOwnerNames.add(cmTemplate.getCmTemplateOwnerName());
+			}
+		}
+		
+		return cmTemplateOwnerNames;
+	}
+	
+	
 	public List<CmTemplate> listAll() throws Exception {
 		 return templateRepo.listAll();
 	}
@@ -40,9 +66,19 @@ public class CmTemplateService {
     }
 	
 
+//    public List<CmTemplate> listAllByCmTemplateOwnerName(String cmTemplateOwnerName)  throws Exception {
+//        return templateRepo.list("cmTemplateOwnerName", cmTemplateOwnerName);
+//    }   
+
     public List<CmTemplate> listAllByCmTemplateOwnerName(String cmTemplateOwnerName)  throws Exception {
-        return templateRepo.list("cmTemplateOwnerName", cmTemplateOwnerName);
-    }    
+        return templateRepo.getCmTemplatesByCmTemplateOwnerName(cmTemplateOwnerName);
+    }   
+
+	
+    public List<CmTemplate> cmTemplateOwnerName()  throws Exception {
+        List<CmTemplate> templates = templateRepo.getCmTemplatesByCmTemplateOwnerNames();
+        return templates;
+    } 
 
 	@Transactional
 	public CmTemplate createCmTemplate(CmTemplate cmTemplate) throws Exception {

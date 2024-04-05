@@ -124,7 +124,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8080/message-api/sampledata/MICA_BlackFriday2024",
+					"raw": "http://localhost:8080/message-api/sampledata/DELL_BlackFriday2024",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -133,7 +133,7 @@
 					"path": [
 						"message-api",
 						"sampledata",
-						"MICA_BlackFriday2024"
+						"DELL_BlackFriday2024"
 					]
 				}
 			},
@@ -267,7 +267,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n  \"id\": 4, // Edit this value by hand\n  \"creationDate\": \"2024-03-25T10:00:00\",\n  \"changedBy\": \"Updated User\",\n  \"cmTemplateName\": \"UpdatedTemplateName\",\n  \"cmTemplateCategory\": \"Updated Category\",\n  \"cmTemplateContent\": \"Updated Template Content\",\n  \"cmCampaignName\": \"Updated Campaign\",\n  \"cmTemplateOwnerName\": \"Updated Owner\"\n}",
+					"raw": "{\n  \"id\": 1, // Edit this value by hand\n  \"creationDate\": \"2024-03-25T10:00:00\",\n  \"changedBy\": \"Updated User\",\n  \"cmTemplateName\": \"DELL_BlackFriday2024\",\n  \"cmTemplateCategory\": \"Updated Category\",\n  \"cmTemplateContent\": \"Updated Template Content\",\n  \"cmCampaignName\": \"Updated Campaign\",\n \"cmTemplateOwnerName\": \"Owner1\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -290,12 +290,12 @@
 			"response": []
 		},
 		{
-			"name": "TEMPLATE DELETE http://localhost:8080/message-api/templates/{cmTemplateName}",
+			"name": "Get TEMPLATE OWNERS  http://localhost:8080/message-api/templates/cmTemplateOwnerNames",
 			"request": {
-				"method": "DELETE",
+				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8080/message-api/templates/UpdatedTemplateName",
+					"raw": "http://localhost:8080/message-api/templates/cmTemplateOwnerNames",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -304,7 +304,50 @@
 					"path": [
 						"message-api",
 						"templates",
-						"UpdatedTemplateName"
+						"cmTemplateOwnerNames"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "TEMPLATES NAMES http://localhost:8080/message-api/templates/listCmTemplateNames/{cmTemplateOwnerNames}",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/message-api/templates/listCmTemplateNames/DELL",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"message-api",
+						"templates",
+						"listCmTemplateNames",
+						"DELL"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "TEMPLATE DELETE http://localhost:8080/message-api/templates/{cmTemplateName}",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/message-api/templates/DELL_BlackFriday2024",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"message-api",
+						"templates",
+						"DELL_BlackFriday2024"
 					]
 				}
 			},
@@ -340,13 +383,13 @@
 			"response": []
 		},
 		{
-			"name": "VALIDATE http://localhost:8080/message-api/validate-message Copy",
+			"name": "VALIDATE SUCCESS http://localhost:8080/message-api/validate-message Copy",
 			"request": {
 				"method": "POST",
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"id\": 1,\n    \"messageId\": \"1\",\n    \"senderSystem\": \"2\", // InvalidMessageException thrown if missing : status 400\n    \"templateOwner\": \"Mica\", // converts to uppercase\n    \"userId\": \"2\", // InvalidMessageException thrown if missing : status 400\n    \"messageType\": \"Email\", // converts to uppercase\n    \"templateId\": \"Hello-World-Email\", // converts to lower case\n    \"templateName\": \"Hello-World-Email\", \n    \"salutation\": \"Mr Piet Pompies\",\n    \"valediction\": \"<br><strong>The Boss</strong>\",\n    \"mapPayload\": {\n        \"name\": \"Piet\",\n        \"surname\": \"Pompies\",\n        \"title\": \"Mr\"\n    },\n    \"cellNumber\": \"dummyCellNumber\",\n    \"messageTo\": \"nico\",\n    \"emailFrom\": \"message-api@loyaltyplus.aero\",\n    \"emailTo\": \"nicomichael2018@yahoo.com\",\n    \"emailCc\": \"nicomichael2012@gmail.com\",\n    \"emailBcc\": \"nicomichael2018@yahoo.com\",\n    \"replyEmail\": \"nico@loyaltyplus.cloud\",\n    \"subject\": \"testSubject002\",\n    \"emailContentType\": \"text/html\",\n    \"body\": \"<html><body> Quam id leo in vitae turpis. Tortor vitae purus faucibus ornare suspendisse sed.</body></html>\",\n    \"enrichedBody\": \"<html><body>hello world</body></html>\",\n    \"priority\": 0,\n    \"sendDate\": \"2024-02-20T00:00:00\",\n    \"messageStatus\": \"dummyMessageStatus\"\n}",
+					"raw": "{\n    \"id\": 1,\n    \"messageId\": \"1\",\n    \"senderSystem\": \"2\", // InvalidMessageException thrown if missing : status 400\n    \"templateOwner\": \"Mica\", // converts to uppercase\n    \"userId\": \"2\", // InvalidMessageException thrown if missing : status 400\n    \"messageType\": \"Email\", // converts to uppercase\n    \"templateId\": \"Hello-World-Email\", // converts to lower case\n    \"templateName\": \"Hello-World-Email\",\n    \"salutation\": \"Mr Piet Pompies\",\n    \"valediction\": \"<br><strong>The Boss</strong>\",\n    \"mapPayload\": {\n        \"name\": \"Piet\",\n        \"surname\": \"Pompies\",\n        \"title\": \"Mr\"\n    },\n    \"cellNumber\": \"dummyCellNumber\",\n    \"messageTo\": \"nico\",\n    \"emailFrom\": \"message-api@loyaltyplus.aero\",\n    \"emailTo\": \"nicomichael2018@yahoo.com\",\n    \"emailCc\": \"nicomichael2012@gmail.com\",\n    \"emailBcc\": \"nicomichael2018@yahoo.com\",\n    \"replyEmail\": \"nico@loyaltyplus.cloud\",\n    \"subject\": \"testSubject002\",\n    \"emailContentType\": \"text/html\",\n    \"body\": \"<html><body> Quam id leo in vitae turpis. Tortor vitae purus faucibus ornare suspendisse sed.</body></html>\",\n    \"enrichedBody\": \"<html><body>hello world</body></html>\",\n    \"priority\": 0,\n    \"sendDate\": \"2024-02-20T00:00:00\",\n    \"messageStatus\": \"dummyMessageStatus\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -369,13 +412,13 @@
 			"response": []
 		},
 		{
-			"name": "GET http://localhost:8080/message-api/enriched/MICA_BlackFriday2024",
+			"name": "GET http://localhost:8080/message-api/enriched/DELL_BlackFriday2024",
 			"request": {
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "GET http://localhost:8080/message-api/enriched/MICA_BlackFriday2024",
-					"protocol": "GET http",
+					"raw": "http://localhost:8080/message-api/enriched/DELL_BlackFriday2024",
+					"protocol": "http",
 					"host": [
 						"localhost"
 					],
@@ -383,7 +426,7 @@
 					"path": [
 						"message-api",
 						"enriched",
-						"MICA_BlackFriday2024"
+						"DELL_BlackFriday2024"
 					]
 				}
 			},

@@ -2,6 +2,7 @@ package za.co.nico.rest;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import java.util.List;
 
 import jakarta.inject.Inject;
 import jakarta.ws.rs.Consumes;
@@ -38,6 +39,34 @@ public class CmTemplateResource {
 		return "nico";
 	}
 
+
+    @GET
+    @Path("/cmTemplateOwnerNames")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getCmTemplateOwnerNames() {
+        try {
+            List<String> cmTemplateOwnerNames = cmTemplateService.cmTemplateOwnerNames();
+            return Response.ok(cmTemplateOwnerNames).build();
+        } catch (Exception e) {
+	        return Response.status(Status.NOT_FOUND)
+                    .entity(APIResponses.APIResponseMessage.NOT_FOUND)
+                    .build();
+        }
+    }
+
+    @GET
+    @Path("/listCmTemplateNames/{cmTemplateOwnerName}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response listCmTemplateNames(@PathParam("cmTemplateOwnerName") String cmTemplateOwnerName) {
+        try {
+            List<String> cmTemplateNames = cmTemplateService.listCmTemplateNames(cmTemplateOwnerName);
+            return Response.ok(cmTemplateNames).build();
+        } catch (Exception e) {
+	        return Response.status(Status.NOT_FOUND)
+                    .entity(APIResponses.APIResponseMessage.NOT_FOUND)
+                    .build();
+        }
+    }
 
 	
 	@GET
