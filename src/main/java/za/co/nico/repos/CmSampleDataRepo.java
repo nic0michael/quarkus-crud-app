@@ -14,7 +14,7 @@ public class CmSampleDataRepo implements PanacheRepository<CmSampleData> {
     }
     
 
-    public List<CmSampleData> findAllByOwnerName(String ownerName) {
+    public List<CmSampleData> findAllByCmTemplateOwnerName(String ownerName) {
         return find("SELECT b FROM CmSampleData b JOIN CmTemplate a ON a.cmTemplateName = b.cmTemplateName WHERE a.cmTemplateOwnerName = ?1", ownerName).list();
     }
 

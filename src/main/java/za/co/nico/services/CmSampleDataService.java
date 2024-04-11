@@ -87,7 +87,7 @@ public class CmSampleDataService {
 	public List<CmSampleData> findAllByCmTemplateOwnerName(String cmTemplateOwnerName) throws Exception {
 		logger.info("Called findAllByCmTemplateOwnerName : cmTemplateOwnerName : "+cmTemplateOwnerName);
 		List<CmSampleData> dataList = new ArrayList<CmSampleData>();
-		List<CmSampleData> foundList = cmSampleDataRepo.findAllByOwnerName(cmTemplateOwnerName);
+		List<CmSampleData> foundList = cmSampleDataRepo.findAllByCmTemplateOwnerName(cmTemplateOwnerName);
 		
 		if(null != foundList && !foundList.isEmpty()) {
 			logger.info("foundList size : "+foundList.size());
