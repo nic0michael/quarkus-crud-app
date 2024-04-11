@@ -44,6 +44,7 @@ public class CmTemplateService {
 
 	public List<String> cmTemplateOwnerNames()  throws Exception {
 		List<String> cmTemplateOwnerNames = new ArrayList<String>();
+		cmTemplateOwnerNames.add("MASTER");
 		List<CmTemplate> templates = cmTemplateOwnerName();
 		if (templates != null || !templates.isEmpty()) {
 			for (CmTemplate cmTemplate : templates) {

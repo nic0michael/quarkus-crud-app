@@ -1,5 +1,6 @@
 package za.co.nico.services;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -80,6 +81,19 @@ public class CmSampleDataService {
 			throw new DatabaseException("Could not find sample data : id : " + id);
 		}
 		cmSampleDataRepo.delete(foundCmSampleData);
+	}
+
+	@Transactional
+	public List<CmSampleData> findAllByCmTemplateOwnerName(String cmTemplateOwnerName) throws Exception {
+		logger.info("Called findAllByCmTemplateOwnerName : cmTemplateOwnerName : "+cmTemplateOwnerName);
+		List<CmSampleData> dataList = new ArrayList<CmSampleData>();
+		List<CmSampleData> foundList = cmSampleDataRepo.findAllByOwnerName(cmTemplateOwnerName);
+		
+		if(null != foundList && !foundList.isEmpty()) {
+			logger.info("foundList size : "+foundList.size());
+			dataList.addAll(foundList);
+		}
+		return dataList;
 	}
 
 }

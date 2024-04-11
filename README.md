@@ -8,7 +8,8 @@ cd /opt/projects/quarkus-crud-app
 
 # This prevents test errors: Maven skip tests (run test-quarkus)
 ./mvnw compile quarkus:dev: -DskipTests
-
+#run this shell script :
+test-quarkus
 ```
 ## C. To test this project using Swagger
 http://localhost:8080/q/swagger-ui/

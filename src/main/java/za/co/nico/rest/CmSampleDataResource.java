@@ -1,5 +1,7 @@
 package za.co.nico.rest;
 
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -26,6 +28,22 @@ public class CmSampleDataResource {
 
     @Inject
     CmSampleDataService cmSampleDataService;
+    
+
+    @GET
+    @Path("/listall/{cmTemplateOwnerName}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response listAllByCmTemplateOwnerName(@PathParam("cmTemplateOwnerName") String cmTemplateOwnerName) {
+        try {
+        	logger.info("Called listAllByCmTemplateOwnerName cmTemplateOwnerName : "+cmTemplateOwnerName);
+            List<CmSampleData> cmTemplateNames = cmSampleDataService.findAllByCmTemplateOwnerName(cmTemplateOwnerName);
+            return Response.ok(cmTemplateNames).build();
+        } catch (Exception e) {
+	        return Response.status(Status.NOT_FOUND)
+                    .entity(APIResponses.APIResponseMessage.NOT_FOUND)
+                    .build();
+        }
+    }
 
     @GET
     @Path("/{cmTemplateName}")
