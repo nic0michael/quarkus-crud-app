@@ -27,7 +27,7 @@ import za.co.nico.services.CmTemplateService;
 import za.co.nico.services.EnrichedDisplayMessageService;
 import za.co.nico.type.APIResponses;
 
-@Path("/message-api/enriched")
+@Path("/enriched")
 public class CmEnrichedDisplayDataResource {
 	
 	private static final Logger logger = LoggerFactory.getLogger(CmEnrichedDisplayDataResource.class);

@@ -22,7 +22,7 @@ import za.co.nico.exceptions.InvalidSampleDataException;
 import za.co.nico.services.CmSampleDataService;
 import za.co.nico.type.APIResponses;
 
-@Path("/message-api/sampledata")
+@Path("/sampledata")
 public class CmSampleDataResource {
     private static Logger logger = LoggerFactory.getLogger(CmSampleDataResource.class);
 

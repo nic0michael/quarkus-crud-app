@@ -21,7 +21,7 @@ import za.co.nico.exceptions.InvalidTemplateException;
 import za.co.nico.services.CmTemplateService;
 import za.co.nico.type.APIResponses;
 
-@Path("/message-api/templates")
+@Path("templates")
 public class CmTemplateResource {
 	private static Logger logger = LoggerFactory.getLogger(CmTemplateResource.class);
 
