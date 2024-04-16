@@ -68,6 +68,19 @@ public class CmTemplateResource {
         }
     }
 
+    @GET
+    @Path("/listCmTemplatesBy/{cmTemplateOwnerName}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response listAllByCmTemplateOwnerName(@PathParam("cmTemplateOwnerName") String cmTemplateOwnerName) {
+        try {
+            List<CmTemplate> cmTemplates = cmTemplateService.listAllByCmTemplateOwnerName(cmTemplateOwnerName);
+            return Response.ok(cmTemplates).build();
+        } catch (Exception e) {
+	        return Response.status(Status.NOT_FOUND)
+                    .entity(APIResponses.APIResponseMessage.NOT_FOUND)
+                    .build();
+        }
+    }
 	
 	@GET
 	@Path("/{cmTemplateName}")
