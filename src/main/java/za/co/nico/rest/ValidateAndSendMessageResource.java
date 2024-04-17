@@ -33,7 +33,7 @@ import za.co.nico.dtos.MessageDto;
 import za.co.nico.exceptions.InvalidMessageException;
 import za.co.nico.services.ValidateSendMessageService;
 
-@Path("/message-api/validate-message")
+@Path("/validate-message")
 public class ValidateAndSendMessageResource {
 	private static Logger logger = LoggerFactory.getLogger(ValidateAndSendMessageResource.class);
 
