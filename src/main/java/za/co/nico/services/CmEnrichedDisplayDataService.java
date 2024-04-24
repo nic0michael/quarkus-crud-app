@@ -1,32 +1,19 @@
 package za.co.nico.services;
 
-import java.time.LocalDateTime;
-import java.util.Map;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-
+import java.time.LocalDateTime;
+import java.util.Map;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import jakarta.enterprise.context.ApplicationScoped;
-import jakarta.inject.Inject;
-import jakarta.persistence.Access;
-import jakarta.persistence.AccessType;
-import jakarta.persistence.Column;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.transaction.Transactional;
-import jakarta.validation.constraints.NotNull;
 import jakarta.enterprise.util.TypeLiteral;
+import jakarta.inject.Inject;
 import jakarta.json.bind.Jsonb;
 import jakarta.json.bind.JsonbBuilder;
-import jakarta.json.bind.JsonbConfig;
-import jakarta.json.bind.JsonbException;
+import jakarta.transaction.Transactional;
 
-import java.util.Map;
-import za.co.nico.dtos.MessageDto;
 import za.co.nico.entities.CmEnrichedDisplayData;
 import za.co.nico.entities.CmSampleData;
 import za.co.nico.entities.CmTemplate;

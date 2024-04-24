@@ -1,23 +1,19 @@
 package za.co.nico.services;
 
+import java.io.OutputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.UUID;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import jakarta.enterprise.context.ApplicationScoped;
-import jakarta.inject.Inject;
-import jakarta.transaction.Transactional;
-import jakarta.enterprise.context.ApplicationScoped;
-import jakarta.ws.rs.client.Client;
-import jakarta.ws.rs.client.ClientBuilder;
-import jakarta.ws.rs.client.Entity;
-import jakarta.ws.rs.client.WebTarget;
-import jakarta.ws.rs.core.MediaType;
-import java.util.UUID;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-
 import za.co.nico.dtos.MessageDto;
+import za.co.nico.utils.MessageDtoParser;
 import za.co.nico.validators.MessageDtoValidator;
 
 @ApplicationScoped
@@ -33,23 +29,38 @@ public class ValidateSendMessageService {
 		boolean operation = TEST; 
 		logger.info("sendMessage called : operation :"+operation);
 		messageDto.setMessageId(makeMessageId());
-		if (!MessageDtoValidator.validateSendBody(messageDto)) {
-			Client client = null;
-			
+		if (!MessageDtoValidator.validateSendBody(messageDto)) {			
 			if (operation) {
+				String messageRequest = MessageDtoParser.jsonSerializeMessageDto(messageDto);
+				logger.info("sendMessage creating RestClient");
 				try {
-					client = ClientBuilder.newClient();
+                    URL url = new URL(REST_SERVICE_URL);
+					
+					HttpURLConnection connection = null;
 
-					WebTarget target = client.target(REST_SERVICE_URL);
+                    connection = (HttpURLConnection) url.openConnection();
+                    connection.setRequestMethod("POST");
+                    connection.setRequestProperty("Content-Type", "application/json");
+                    connection.setDoOutput(true);
 
-					MessageDto responseDto = target.request(MediaType.APPLICATION_JSON)
-							.post(Entity.entity(messageDto, MediaType.APPLICATION_JSON), MessageDto.class);
+                    OutputStream os = connection.getOutputStream();
+                    os.write(messageRequest.getBytes()); 
+                    os.flush();
 
-					client.close();
+                    if (connection.getResponseCode() == HttpURLConnection.HTTP_OK) {
+                        // Process successful response
+                        logger.info("Message sent successfully");
+                    } else {
+                        // Handle error response
+                        logger.error("Failed to send message. Response code: " + connection.getResponseCode());
+                    }
+
+
+					
 				} catch (Exception e) {
 					logger.error("Failed to send message ", e);
 				} finally {
-					client.close();
+
 				}
 			}
 
